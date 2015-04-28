@@ -1,0 +1,21 @@
+{
+  "name": "hose-charts",
+  "version": "0.0.0",
+  "description": "Hose charts connect charts to your database.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.inside.nicta.com.au/kbawden/hose-charts"
+  },
+  "keywords": [
+    "charts",
+    "database",
+    "browser",
+    "d3"
+  ],
+  "author": "Kenni Bawden",
+  "license": "MIT"
+}
