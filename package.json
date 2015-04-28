@@ -2,7 +2,7 @@
   "name": "hose-charts",
   "version": "0.0.0",
   "description": "Hose charts connect charts to your database.",
-  "main": "index.js",
+  "main": "hose-charts.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -17,5 +17,12 @@
     "d3"
   ],
   "author": "Kenni Bawden",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "d3": "^3.5.5",
+    "hose-client": "git://github.inside.nicta.com.au/kbawden/hose.git"
+  },
+  "devDependencies": {
+    "beefy": "^2.1.5"
+  }
 }
