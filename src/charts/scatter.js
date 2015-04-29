@@ -74,7 +74,7 @@ var scatter = function(opts) {
             resize: function(chart, opts) {
                 opts = opts || {};
                 opts.height = opts.height || chart.element.node().offsetHeight;
-                opts.width = opts.height || chart.element.node().offsetWidth;
+                opts.width = opts.width || chart.element.node().offsetWidth;
                 chart.chart.resize(opts);
             },
         },

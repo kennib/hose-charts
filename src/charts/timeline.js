@@ -40,13 +40,13 @@ var scatter = function(opts) {
                         x: {
                             type: 'timeseries',
                             tick: {
-                                format: fields.date.format,
+                                format: function(d) { return fields.date.format(new Date(d)); },
                                 fit: false,
                             },
                         },
                         y: {
                             tick: {
-                                format: fields.size.format,
+                                format: fields.size.field.format,
                                 fit: false,
                             }
                         },
@@ -89,7 +89,7 @@ var scatter = function(opts) {
             resize: function(chart, opts) {
                 opts = opts || {};
                 opts.height = opts.height || chart.element.node().offsetHeight;
-                opts.width = opts.height || chart.element.node().offsetWidth;
+                opts.width = opts.width || chart.element.node().offsetWidth;
                 chart.chart.resize(opts);
             },
         },
