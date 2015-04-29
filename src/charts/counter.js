@@ -45,6 +45,8 @@ var counter = function (opts) {
             exit: function(chart) {
                 chart.main.remove();
             },
+            resize: function(chart, opts) {
+            },
         },
     });
 };
