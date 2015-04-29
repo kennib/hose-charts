@@ -9,6 +9,7 @@ var pie = function(opts) {
     var element = opts.element;
     var hose = opts.hose;
     var fields = opts.fields;
+    var items = opts.items || 15;
 
     // Get fields
     var size = fields.size;
@@ -44,9 +45,9 @@ var pie = function(opts) {
                 selection.group = group.name;
                 selection.order = {
                     key: 'aggregate',
-                    order: 'DESC',
+                    order: 'DESC NULLS LAST',
                 };
-                selection.limit = 15;
+                selection.limit = items;
                 return selection;
             }, trans.aggregate(size.aggregate, size.field.name)),
             update: function(chart, data) {
