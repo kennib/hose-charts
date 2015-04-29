@@ -19,6 +19,7 @@
   "author": "Kenni Bawden",
   "license": "MIT",
   "dependencies": {
+    "bilby": "0.0.2",
     "c3": "^0.4.10",
     "d3": "^3.5.5",
     "hose-client": "git://github.inside.nicta.com.au/kbawden/hose.git"
