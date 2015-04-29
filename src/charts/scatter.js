@@ -26,6 +26,20 @@ var scatter = function(opts) {
                         type: 'scatter',
                         json: [],
                     },
+                    axis: {
+                        x: {
+                            tick: {
+                                format: fields.x.format,
+                                fit: false,
+                            },
+                        },
+                        y: {
+                            tick: {
+                                format: fields.y.format,
+                                fit: false,
+                            }
+                        },
+                    },
                 });
 
                 return {
