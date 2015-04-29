@@ -29,6 +29,7 @@ var scatter = function(opts) {
                 });
 
                 return {
+                    element: element,
                     main: main,
                     chart: chart,
                 };
@@ -54,6 +55,9 @@ var scatter = function(opts) {
                 chart.main.remove();
             },
             resize: function(chart, opts) {
+                opts = opts || {};
+                opts.height = opts.height || chart.element.node().offsetHeight;
+                opts.width = opts.height || chart.element.node().offsetWidth;
                 chart.chart.resize(opts);
             },
         },
