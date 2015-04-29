@@ -1,5 +1,6 @@
 var d3 = require('d3');
 var c3 = require('c3');
+var _ =  require('bilby');
 var hoseChart = require('../chart');
 var trans = require('../transformers');
 
@@ -34,7 +35,11 @@ var scatter = function(opts) {
             },
             select: function(chart, selection) {
             },
-            transform: trans.random({ x: fields.x.name, y: fields.y.name }, 400),
+            transform: _.compose(function(selection) {
+                selection.filters = {};
+                selection.filters['('+fields.x.name+' IS NOT NULL AND '+fields.y.name+' IS NOT NULL) or 1'] = '0';
+                return selection;
+            }, trans.random({ x: fields.x.name, y: fields.y.name }, 400)),
             update: function(chart, data) {
                 // Load new data into chart
                 chart.chart.load({
