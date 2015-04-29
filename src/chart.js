@@ -8,7 +8,8 @@ hoseChart = function(opts) {
         select = opts.on.select,
         transform = opts.on.transform,
         update = opts.on.update,
-        exit = opts.on.exit;
+        exit = opts.on.exit,
+        resize = opts.on.resize;
     
     // Draw chart
     var chart = enter(element);
@@ -16,6 +17,11 @@ hoseChart = function(opts) {
     // Define remove method
     var remove = function() {
         exit(chart);
+    };
+
+    // Define resize method
+    var _resize = function(opts) {
+        resize(chart, opts);
     };
 
     // Connect hose to chart
@@ -30,6 +36,7 @@ hoseChart = function(opts) {
     return Object.freeze({
         chart: chart,
         remove: remove,
+        resize: _resize,
         on: {
             enter: enter,
             select: select,
