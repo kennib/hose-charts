@@ -23,6 +23,9 @@ var scatter = function(opts) {
                 // Create elements
                 var main = element.append('div');
 
+                // Temporary: stop data leaking through from parent element
+                main.data([1]);
+
                 // Create chart
                 var chart = c3.generate({
                     bindto: main,
