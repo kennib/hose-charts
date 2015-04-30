@@ -34,7 +34,7 @@ var bar = function(opts) {
                         type: 'bar',
                         json: [],
                         names: {
-                            aggregate: fields.size.field.label,
+                            aggregate: size.field.label,
                         },
                     },
                     legend: {
@@ -84,13 +84,13 @@ var bar = function(opts) {
                     },
                 });
 
-                chart.main
-                    .selectAll('.c3-event-rect')
-                    .on('click', function(d, i) {
-                      console.log(data[i]);
-                        var filter = {};
-                        filter[fields.date.name] = data[i].date;
-                        hose.filter(filter);
+                chart.main.selectAll('.c3-event-rect')
+                    .each(function(d) {
+                        d3.select(this).on('click', function() {
+                            var filter = {};
+                            filter[group.name] = d.x.toString();
+                            hose.filter(filter);
+                        });
                     });
             },
             exit: function(chart) {
