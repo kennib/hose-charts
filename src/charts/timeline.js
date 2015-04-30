@@ -91,6 +91,14 @@ var scatter = function(opts) {
                         value: ['aggregate'],
                     },
                 });
+
+                chart.main
+                    .selectAll('.c3-event-rect')
+                    .on('click', function(d, i) {
+                        var filter = {};
+                        filter[fields.date.name] = data[i].date;
+                        hose.filter(filter);
+                    });
             },
             exit: function(chart) {
                 chart.main.remove();
