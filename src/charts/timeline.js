@@ -4,7 +4,7 @@ var _ =  require('bilby');
 var hoseChart = require('../chart');
 var trans = require('../transformers');
 
-var scatter = function(opts) {
+var timeline = function(opts) {
     // Get options
     var element = opts.element;
     var hose = opts.hose;
@@ -113,4 +113,4 @@ var scatter = function(opts) {
     });
 };
 
-module.exports = scatter;
+module.exports = timeline;
