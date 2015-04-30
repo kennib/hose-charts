@@ -29,6 +29,10 @@ var scatter = function(opts) {
                     data: {
                         type: 'scatter',
                         json: [],
+                        names: {
+                            x: fields.x.label,
+                            y: fields.y.label,
+                        },
                     },
                     axis: {
                         x: {

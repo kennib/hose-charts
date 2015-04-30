@@ -33,6 +33,9 @@ var scatter = function(opts) {
                     data: {
                         type: 'bar',
                         json: [],
+                        names: {
+                            aggregate: fields.size.field.label,
+                        },
                     },
                     bar: {
                         width: 1.5,
