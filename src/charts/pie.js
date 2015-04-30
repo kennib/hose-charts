@@ -34,6 +34,11 @@ var pie = function(opts) {
                     data: {
                         type: 'pie',
                         json: [],
+                        onclick: function(d, element) {
+                            var filter = {};
+                            filter[group.name] = d.id;
+                            hose.filter(filter);
+                        },
                     },
                 });
 
