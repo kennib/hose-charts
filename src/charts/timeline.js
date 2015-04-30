@@ -44,7 +44,9 @@ var scatter = function(opts) {
                         x: {
                             type: 'timeseries',
                             tick: {
-                                format: function(d) { return fields.date.format(new Date(d)); },
+                                format: fields.date.format
+                                    ? function(d) { return fields.date.format(new Date(d)); }
+                                    : undefined,
                                 fit: false,
                             },
                         },
