@@ -1,3 +1,5 @@
+var loadingBar = require('./loadingBar.js');
+
 hoseChart = function(opts) {
     // Get options
     var element = opts.element;
@@ -13,10 +15,12 @@ hoseChart = function(opts) {
     
     // Draw chart
     var chart = enter(element);
+    var bar = loadingBar(element);
 
     // Define remove method
     var remove = function() {
         exit(chart);
+        bar.remove();
     };
 
     // Define resize method
@@ -27,6 +31,9 @@ hoseChart = function(opts) {
     // Connect hose to chart
     hose.connect(transform, function(data) {
         update(chart, data);
+        bar.finish();
+    }, function(reply) {
+        bar.countdown(reply.timing);
     });
     hose.onSelect(function(selection) {
         select(chart, selection);
