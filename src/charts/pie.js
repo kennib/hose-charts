@@ -25,8 +25,7 @@ var pie = function(opts) {
                 var main = element.append('div');
 
                 // Temporary: stop data leaking through from parent element
-                if (element.datum())
-                    main.data([1]);
+                delete main[0][0]['__data__'];
 
                 // Create chart
                 var chart = c3.generate({
