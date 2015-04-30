@@ -20,7 +20,8 @@ var scatter = function(opts) {
                 var main = element.append('div');
 
                 // Temporary: stop data leaking through from parent element
-                main.data([1]);
+                if (element.datum())
+                    main.data([1]);
 
                 // Create chart
                 var chart = c3.generate({
