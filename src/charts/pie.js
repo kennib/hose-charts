@@ -56,11 +56,15 @@ var pie = function(opts) {
                 return selection;
             }, trans.aggregate(size.aggregate, size.field.name)),
             update: function(chart, data) {
+                var oldData = chart.chart.data()
+                  .map(function(d) { return d.id; })
+                  .filter(function(d) { return data.every(function(da) { return d !== da.name; }); })
                 // Load new data into chart
                 chart.chart.load({
                     columns: data.map(function(d) {
                         return [d.name, d.aggregate];
                     }),
+                    unload: oldData,
                 });
             },
             exit: function(chart) {
