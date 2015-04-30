@@ -34,6 +34,9 @@ var scatter = function(opts) {
                             y: fields.y.label,
                         },
                     },
+                    legend: {
+                        show: false,
+                    },
                     axis: {
                         x: {
                             tick: {

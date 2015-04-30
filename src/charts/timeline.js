@@ -40,6 +40,9 @@ var scatter = function(opts) {
                     bar: {
                         width: 1.5,
                     },
+                    legend: {
+                        show: false,
+                    },
                     axis: {
                         x: {
                             type: 'timeseries',
