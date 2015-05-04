@@ -1,7 +1,7 @@
 var d3 = require('d3');
 var c3 = require('c3');
 var _ =  require('bilby');
-var hoseChart = require('../chart');
+var hoseC3Chart = require('../c3-chart');
 var trans = require('../transformers');
 
 var scatter = function(opts) {
@@ -11,20 +11,13 @@ var scatter = function(opts) {
     var fields = opts.fields;
     
     // Make the chart
-    return hoseChart({
+    return hoseC3Chart({
         element: element,
         hose: hose,
         on: {
             enter: function(element) {
-                // Create elements
-                var main = element.append('div');
-
-                // Temporary: stop data leaking through from parent element
-                delete main[0][0]['__data__'];
-
-                // Create chart
-                var chart = c3.generate({
-                    bindto: main,
+                // Chart options
+                var chartOpts = {
                     data: {
                         type: 'scatter',
                         json: [],
@@ -50,13 +43,9 @@ var scatter = function(opts) {
                             }
                         },
                     },
-                });
-
-                return {
-                    element: element,
-                    main: main,
-                    chart: chart,
                 };
+
+                return chartOpts;
             },
             select: function(chart, selection) {
             },
@@ -66,23 +55,16 @@ var scatter = function(opts) {
                 return selection;
             }, trans.random({ x: fields.x.name, y: fields.y.name }, 400)),
             update: function(chart, data) {
-                // Load new data into chart
-                chart.chart.load({
+                // Loading options for new data
+                var loadOpts = {
                     json: data,
                     keys: {
                         x: 'x',
                         value: ['y'],
                     },
-                });
-            },
-            exit: function(chart) {
-                chart.main.remove();
-            },
-            resize: function(chart, opts) {
-                opts = opts || {};
-                opts.height = opts.height || chart.element.node().offsetHeight;
-                opts.width = opts.width || chart.element.node().offsetWidth;
-                chart.chart.resize(opts);
+                };
+
+                return loadOpts;
             },
         },
     });

@@ -1,7 +1,6 @@
 var d3 = require('d3');
-var c3 = require('c3');
 var _ =  require('bilby');
-var hoseChart = require('../chart');
+var hoseC3Chart = require('../c3-chart');
 var trans = require('../transformers');
 
 var timeline = function(opts) {
@@ -15,20 +14,13 @@ var timeline = function(opts) {
     var size = fields.size;
     
     // Make the chart
-    return hoseChart({
+    return hoseC3Chart({
         element: element,
         hose: hose,
         on: {
             enter: function(element) {
-                // Create elements
-                var main = element.append('div');
-
-                // Temporary: stop data leaking through from parent element
-                delete main[0][0]['__data__'];
-
-                // Create chart
-                var chart = c3.generate({
-                    bindto: main,
+                // Chart options
+                var chartOpts = {
                     data: {
                         type: 'bar',
                         json: [],
@@ -59,13 +51,9 @@ var timeline = function(opts) {
                             }
                         },
                     },
-                });
-
-                return {
-                    element: element,
-                    main: main,
-                    chart: chart,
                 };
+
+                return chartOpts;
             },
             select: function(chart, selection) {
             },
@@ -79,8 +67,17 @@ var timeline = function(opts) {
                 return selection;
             }, trans.aggregate(size.aggregate, size.field.name)),
             update: function(chart, data) {
-                // Load new data into chart
-                chart.chart.load({
+                // Update on bar click
+                chart.main
+                    .selectAll('.c3-event-rect')
+                    .on('click', function(d, i) {
+                        var filter = {};
+                        filter[fields.date.name] = data[i].date;
+                        hose.filter(filter);
+                    });
+
+                // Data loading options
+                var loadOpts = {
                     json: data.map(function(d) {
                         d.date = new Date(d.date);
                         return d;
@@ -89,24 +86,9 @@ var timeline = function(opts) {
                         x: 'date',
                         value: ['aggregate'],
                     },
-                });
+                };
 
-                chart.main
-                    .selectAll('.c3-event-rect')
-                    .on('click', function(d, i) {
-                        var filter = {};
-                        filter[fields.date.name] = data[i].date;
-                        hose.filter(filter);
-                    });
-            },
-            exit: function(chart) {
-                chart.main.remove();
-            },
-            resize: function(chart, opts) {
-                opts = opts || {};
-                opts.height = opts.height || chart.element.node().offsetHeight;
-                opts.width = opts.width || chart.element.node().offsetWidth;
-                chart.chart.resize(opts);
+                return loadOpts;
             },
         },
     });

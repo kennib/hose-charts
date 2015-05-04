@@ -1,7 +1,7 @@
 var d3 = require('d3');
 var c3 = require('c3');
 var _ =  require('bilby');
-var hoseChart = require('../chart');
+var hoseC3Chart = require('../c3-chart');
 var trans = require('../transformers');
 
 var pie = function(opts) {
@@ -16,20 +16,13 @@ var pie = function(opts) {
     var group = fields.group;
     
     // Make the chart
-    return hoseChart({
+    return hoseC3Chart({
         element: element,
         hose: hose,
         on: {
             enter: function(element) {
-                // Create elements
-                var main = element.append('div');
-
-                // Temporary: stop data leaking through from parent element
-                delete main[0][0]['__data__'];
-
-                // Create chart
-                var chart = c3.generate({
-                    bindto: main,
+                // Chart options
+                var chartOpts = {
                     data: {
                         type: 'pie',
                         json: [],
@@ -39,13 +32,9 @@ var pie = function(opts) {
                             hose.filter(filter);
                         },
                     },
-                });
-
-                return {
-                    element: element,
-                    main: main,
-                    chart: chart,
                 };
+
+                return chartOpts;
             },
             select: function(chart, selection) {
             },
@@ -60,25 +49,20 @@ var pie = function(opts) {
                 return selection;
             }, trans.aggregate(size.aggregate, size.field.name)),
             update: function(chart, data) {
+                // Old data which should be removed
                 var oldData = chart.chart.data()
                   .map(function(d) { return d.id; })
                   .filter(function(d) { return data.every(function(da) { return d !== da.name; }); })
-                // Load new data into chart
-                chart.chart.load({
+
+                // Load options for loading new data into chart
+                var loadOpts = {
                     columns: data.map(function(d) {
                         return [d.name, d.aggregate];
                     }),
                     unload: oldData,
-                });
-            },
-            exit: function(chart) {
-                chart.main.remove();
-            },
-            resize: function(chart, opts) {
-                opts = opts || {};
-                opts.height = opts.height || chart.element.node().offsetHeight;
-                opts.width = opts.width || chart.element.node().offsetWidth;
-                chart.chart.resize(opts);
+                };
+
+                return loadOpts;
             },
         },
     });
