@@ -26,8 +26,7 @@ hoseC3Chart = function(opts) {
                 var main = element.append('div');
 
                 // Temporary: stop data leaking through from parent element
-                if (element.datum())
-                    main.data([1]);
+                delete main[0][0]['__data__'];
 
                 // Get chart options
                 var chartOpts = enter(element);
