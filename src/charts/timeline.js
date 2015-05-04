@@ -51,6 +51,16 @@ var timeline = function(opts) {
                             }
                         },
                     },
+                    onrendered: function() {
+                        // Select date on bar click
+                        element
+                            .selectAll('.c3-event-rect')
+                            .on('click', function(d, i) {
+                                var filter = {};
+                                filter[fields.date.name] = d.x;
+                                hose.filter(filter);
+                            });
+                    },
                 };
 
                 return chartOpts;
@@ -67,15 +77,6 @@ var timeline = function(opts) {
                 return selection;
             }, trans.aggregate(size.aggregate, size.field.name)),
             update: function(chart, data) {
-                // Update on bar click
-                chart.main
-                    .selectAll('.c3-event-rect')
-                    .on('click', function(d, i) {
-                        var filter = {};
-                        filter[fields.date.name] = data[i].date;
-                        hose.filter(filter);
-                    });
-
                 // Data loading options
                 var loadOpts = {
                     json: data.map(function(d) {
