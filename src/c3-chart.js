@@ -64,8 +64,14 @@ hoseC3Chart = function(opts) {
                 if (resize) {
                     resize(chart, opts)
                 } else {
+                    // Get loading bar dimensions
+                    var loadingBar = chart.element.select('.loading-bar');
+                    var loadingBarHeight = loadingBar.node().offsetHeight;
+
+                    // Resize chart
                     opts = opts || {};
-                    opts.height = opts.height || chart.element.node().offsetHeight;
+                    opts = opts || {};
+                    opts.height = opts.height || chart.element.node().offsetHeight - loadingBarHeight;
                     opts.width = opts.width || chart.element.node().offsetWidth;
                     chart.chart.resize(opts);
                 }
