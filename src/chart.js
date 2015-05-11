@@ -2,6 +2,7 @@ var loadingBar = require('./loadingBar.js');
 
 hoseChart = function(opts) {
     // Get options
+    opts = opts || opts;
     var element = opts.element;
     var hose = opts.hose;
     var fields = opts.fields;
@@ -14,31 +15,33 @@ hoseChart = function(opts) {
         exit = opts.on.exit,
         resize = opts.on.resize;
     
-    // Draw chart
-    var chart = enter(element);
-    var bar = loadingBar(element);
+    if (element !== undefined) {
+        // Draw chart
+        var chart = enter(element);
+        var bar = loadingBar(element);
 
-    // Define remove method
-    var remove = function() {
-        exit(chart);
-        bar.remove();
-    };
+        // Define remove method
+        var remove = function() {
+            exit(chart);
+            bar.remove();
+        };
 
-    // Define resize method
-    var _resize = function(opts) {
-        resize(chart, opts);
-    };
+        // Define resize method
+        var _resize = function(opts) {
+            resize(chart, opts);
+        };
 
-    // Connect hose to chart
-    hose.connect(transform, function(data) {
-        update(chart, data);
-        bar.finish();
-    }, function(reply) {
-        bar.countdown(reply.timing);
-    });
-    hose.onSelect(function(selection) {
-        select(chart, selection);
-    });
+        // Connect hose to chart
+        hose.connect(transform, function(data) {
+            update(chart, data);
+            bar.finish();
+        }, function(reply) {
+            bar.countdown(reply.timing);
+        });
+        hose.onSelect(function(selection) {
+            select(chart, selection);
+        });
+    }
 
     // Return object
     return Object.freeze({
