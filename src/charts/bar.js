@@ -18,11 +18,6 @@ var bar = function(opts) {
     return hoseChart({
         element: element,
         hose: hose,
-        fields: [{
-            name: 'size',
-        }, {
-            name: 'group',
-        }],
         on: {
             enter: function(element) {
                 // Create elements
@@ -109,5 +104,11 @@ var bar = function(opts) {
         },
     });
 };
+
+bar.fields = [{
+    name: 'group',
+}, {
+    name: 'size',
+}];
 
 module.exports = bar;

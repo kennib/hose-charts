@@ -5,7 +5,6 @@ hoseChart = function(opts) {
     opts = opts || opts;
     var element = opts.element;
     var hose = opts.hose;
-    var fields = opts.fields;
 
     // Event callbacks
     var enter = opts.on.enter,
@@ -46,7 +45,6 @@ hoseChart = function(opts) {
     // Return object
     return Object.freeze({
         chart: chart,
-        fields: fields,
         remove: remove,
         resize: _resize,
         on: {

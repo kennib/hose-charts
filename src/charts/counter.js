@@ -15,9 +15,6 @@ var counter = function (opts) {
     return hoseChart({
         element: element,
         hose: hose,
-        fields: [{
-            name: 'count',
-        }],
         on: {
             enter: function(element) {
                 // Create elements
@@ -53,5 +50,9 @@ var counter = function (opts) {
         },
     });
 };
+
+counter.fields = [{
+    name: 'count',
+}];
 
 module.exports = counter;

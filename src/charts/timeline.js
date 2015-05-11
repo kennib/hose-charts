@@ -17,11 +17,6 @@ var timeline = function(opts) {
     return hoseC3Chart({
         element: element,
         hose: hose,
-        fields: [{
-            name: 'date',
-        }, {
-            name: 'size',
-        }],
         on: {
             enter: function(element) {
                 // Chart options
@@ -99,5 +94,11 @@ var timeline = function(opts) {
         },
     });
 };
+
+timeline.fields = [{
+    name: 'date',
+}, {
+    name: 'size',
+}];
 
 module.exports = timeline;
