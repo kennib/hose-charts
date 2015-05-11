@@ -15,6 +15,9 @@ var counter = function (opts) {
     return hoseChart({
         element: element,
         hose: hose,
+        fields: [{
+            name: 'count',
+        }],
         on: {
             enter: function(element) {
                 // Create elements

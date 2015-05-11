@@ -19,6 +19,11 @@ var pie = function(opts) {
     return hoseC3Chart({
         element: element,
         hose: hose,
+        fields: [{
+            name: 'size',
+        }, {
+            name: 'group',
+        }],
         on: {
             enter: function(element) {
                 // Chart options
