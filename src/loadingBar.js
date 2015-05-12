@@ -1,10 +1,7 @@
 function loadingBar(element, overlay) {
-	var width = element.node().offsetWidth;
-	var height = element.node().offsetHeight;
-
 	var bar = element.append('svg')
 		.classed('loading-bar', true)
-		.style('width', width);
+		.style('width', '100%');
 	
 	if (overlay)
 		bar
@@ -13,10 +10,11 @@ function loadingBar(element, overlay) {
 
 	var progress = bar.append('rect')
 		.classed('loading-progress', true)
-		.attr('height', height);
+		.attr('height', '5px');
 
 	function update(amount) {
 		return function(progressBar) {
+			var width = element.node().offsetWidth;
 			progressBar
 				.attr('x', (width*amount)/2)
 				.attr('width', width - width*amount);
