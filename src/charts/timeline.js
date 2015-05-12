@@ -99,6 +99,7 @@ timeline.fields = [{
     name: 'date',
 }, {
     name: 'size',
+    type: 'aggregate',
 }];
 
 module.exports = timeline;

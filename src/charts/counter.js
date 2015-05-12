@@ -53,6 +53,7 @@ var counter = function (opts) {
 
 counter.fields = [{
     name: 'count',
+    type: 'aggregate',
 }];
 
 module.exports = counter;

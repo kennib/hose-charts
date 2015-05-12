@@ -109,6 +109,7 @@ bar.fields = [{
     name: 'group',
 }, {
     name: 'size',
+    type: 'aggregate',
 }];
 
 module.exports = bar;

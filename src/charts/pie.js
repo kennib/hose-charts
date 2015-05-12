@@ -72,6 +72,7 @@ pie.fields = [{
     name: 'group',
 }, {
     name: 'size',
+    type: 'aggregate',
 }];
 
 module.exports = pie;
