@@ -39,8 +39,8 @@ var pie = function(opts) {
             select: function(chart, selection) {
             },
             transform: _.compose(function(selection) {
-                selection.selection.name = group.name;
-                selection.group = group.name;
+                selection.selection.name = fields.group.name;
+                selection.group = fields.group.name;
                 selection.order = {
                     key: 'aggregate',
                     order: 'DESC NULLS LAST',
