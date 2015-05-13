@@ -11,8 +11,8 @@ var bar = function(opts) {
     var fields = opts.fields;
 
     // Get fields
-    var group = fields.group;
-    var size = fields.size;
+    var group = fields.group || {};
+    var size = fields.size || {};
     
     // Make the chart
     return hoseChart({
