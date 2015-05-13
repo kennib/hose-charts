@@ -41,7 +41,7 @@ var bar = function(opts) {
                     },
                     axis: {
                         x: {
-                            type: 'bar',
+                            type: group.type !== 'categorical' && group.type !== 'ordinal' ? 'bar' : 'category',
                             tick: {
                                 format: fields.group.format,
                                 fit: false,
