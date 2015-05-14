@@ -40,7 +40,7 @@ var counter = function (opts) {
             update: function(chart, data) {
                 // Update chart data
                 chart.data.data(data)
-                    .text(function(d) { return count.field.format(d.aggregate); });
+                    .text(function(d) { return count.field.format ? count.field.format(d.aggregate) : d.aggregate; });
             },
             exit: function(chart) {
                 chart.main.remove();
