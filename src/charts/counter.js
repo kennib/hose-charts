@@ -18,7 +18,7 @@ var counter = function (opts) {
         on: {
             enter: function(element) {
                 // Create elements
-                var main = element.append('div'),
+                var main = element.append('div').classed('counter-chart', true),
                     title = main.append('h3'),
                     data = main.append('p');
 
