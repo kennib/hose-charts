@@ -23,6 +23,7 @@ hoseChart = function(opts) {
         var remove = function() {
             exit(chart);
             bar.remove();
+            hose.disconnect(this.connection);
         };
 
         // Define resize method
@@ -31,7 +32,8 @@ hoseChart = function(opts) {
         };
 
         // Connect hose to chart
-        hose.connect(transform, function(data) {
+        var connection = hose.connect(transform,
+        function(data) {
             update(chart, data);
             bar.finish();
         }, function(reply) {
@@ -45,6 +47,7 @@ hoseChart = function(opts) {
     // Return object
     return Object.freeze({
         chart: chart,
+        connection: connection,
         remove: remove,
         resize: _resize,
         on: {
