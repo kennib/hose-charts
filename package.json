@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.inside.nicta.com.au/kbawden/hose-charts"
+    "url": "https://github.com/kennib/hose-charts"
   },
   "keywords": [
     "charts",
@@ -22,7 +22,7 @@
     "bilby": "0.0.2",
     "c3": "^0.4.10",
     "d3": "^3.5.5",
-    "hose-client": "git://github.inside.nicta.com.au/kbawden/hose.git"
+    "hose-client": "git://github.com/kennib/hose.git"
   },
   "devDependencies": {
     "beefy": "^2.1.5"
